@@ -2,6 +2,16 @@
 
 let playerScore = 0
 let compScore = 0
+
+// Button choices 
+const rock = document.getElementById("rock") 
+const paper = document.getElementById("paper") 
+const scissors = document.getElementById("scissors") 
+
+rock.addEventListener("click", () => gameRound("rock"))
+paper.addEventListener("click", () => gameRound("paper"))
+scissors.addEventListener("click", () => gameRound("scissors"))
+//AI choices
 function comp_choices() {
     const random_choice = Math.floor(Math.random() * 3);
     if (random_choice === 0) {
@@ -40,7 +50,7 @@ function gameRound(comp, player) {
 }
 
 
-function playGame() {
+/*function playGame() {
     while (playerScore < 5 && compScore < 5) {
         const enemy = comp_choices();
         const player = player_choice();
@@ -51,14 +61,14 @@ function playGame() {
         console.log(result);
         console.log("Player Score: " + playerScore);
         console.log("Computer Score: " + compScore);
-    }
+    } 
 
     if (playerScore === 5) {
         console.log("Congratulations! You won the game!");
     } else {
         console.log("The computer won the game. Better luck next time!");
     }
-}
+} */
 
-// Start the game
-playGame();
+// Start the game();
+gameRound()
