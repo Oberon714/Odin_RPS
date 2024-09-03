@@ -3,15 +3,10 @@
 let playerScore = 0
 let compScore = 0
 
-// Button choices 
-const rock = document.getElementById("rock") 
-const paper = document.getElementById("paper") 
-const scissors = document.getElementById("scissors") 
+const btns = document.getElementById("btnBox")
+btns.addEventListener("click", running)
 
-rock.addEventListener("click", () => gameRound("rock"))
-paper.addEventListener("click", () => gameRound("paper"))
-scissors.addEventListener("click", () => gameRound("scissors"))
-//AI choices
+//AI choice
 function comp_choices() {
     const random_choice = Math.floor(Math.random() * 3);
     if (random_choice === 0) {
@@ -24,11 +19,7 @@ function comp_choices() {
 }
 
 
-function player_choice() {
-    return prompt("Please enter your choice, Rock, Paper, Scissors: ").toLowerCase()
-
-}
-
+//Game Round
 function gameRound(comp, player) {
     if (
         (player === "rock" && comp === "scissors") ||
@@ -49,26 +40,27 @@ function gameRound(comp, player) {
     }
 }
 
-
-/*function playGame() {
-    while (playerScore < 5 && compScore < 5) {
+    function running(choice) {
+       const playerChoice = choice.target.id;
+    if (["rock", "paper", "scissors"].includes(playerChoice)) { // Ensure it's one of the valid choices
         const enemy = comp_choices();
-        const player = player_choice();
-        const result = gameRound(enemy, player);
-
-        console.log("Computer chose: " + enemy);
-        console.log("Player chose: " + player);
-        console.log(result);
-        console.log("Player Score: " + playerScore);
-        console.log("Computer Score: " + compScore);
-    } 
-
-    if (playerScore === 5) {
-        console.log("Congratulations! You won the game!");
-    } else {
-        console.log("The computer won the game. Better luck next time!");
+        const result = gameRound(playerChoice, enemy); // Play a round
+        
+        // Display the result of the current round
+        document.getElementById('result').textContent = "Result: " + result;
+        
+        // Track and display the score after every button press
+        document.getElementById('score').textContent = "Player Score: " + playerScore + ' : ' + "Computer Score: " + compScore;
+        
+        // Check if either player or computer has reached 5 points
+        if (playerScore >= 5) {
+            document.getElementById('result').textContent = "Congratulations! You won the game!";
+            // Disable buttons to prevent further play
+            btns.removeEventListener("click", running);
+        } else if (compScore >= 5) {
+            document.getElementById('result').textContent = "The computer won the game. Better luck next time!";
+            // Disable buttons to prevent further play
+            btns.removeEventListener("click", running);
+        }
     }
-} */
-
-// Start the game();
-gameRound()
+};
